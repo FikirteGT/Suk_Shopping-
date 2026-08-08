@@ -51,13 +51,13 @@ class _AuthScreenState extends State<AuthScreen>
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.shopping_bag_rounded,
                     size: 48,
-                    color: AppColors.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -67,22 +67,32 @@ class _AuthScreenState extends State<AuthScreen>
                   'ሱቅ Shopping',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.secondary,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                 ),
               ),
               const SizedBox(height: 32),
               Container(
+                padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: Theme.of(context).dividerColor.withValues(alpha: 0.08),
+                  ),
                 ),
                 child: TabBar(
                   controller: _tabController,
-                  indicatorColor: AppColors.primary,
-                  labelColor: AppColors.primary,
-                  unselectedLabelColor: Colors.grey,
-                  selectedLabelColor: AppColors.grey,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  labelColor: Theme.of(context).colorScheme.onPrimary,
+                  unselectedLabelColor: Theme.of(context).brightness == Brightness.dark
+                      ? AppColors.darkTextSecondary
+                      : AppColors.lightTextSecondary,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  dividerColor: Colors.transparent,
                   tabs: const [
                     Tab(text: 'Sign In'),
                     Tab(text: 'Create Account'),
@@ -91,7 +101,7 @@ class _AuthScreenState extends State<AuthScreen>
               ),
               const SizedBox(height: 24),
               SizedBox(
-                height: 340,
+                height: 380,
                 child: TabBarView(
                   controller: _tabController,
                   children: [
@@ -124,7 +134,7 @@ class _AuthScreenState extends State<AuthScreen>
                               child: const Text('Forgot Password?'),
                             ),
                           ),
-                          const Spacer(),
+                          const SizedBox(height: 24),
                           CustomButton(
                             text: 'Sign In',
                             isLoading: _isLoading,
@@ -159,7 +169,7 @@ class _AuthScreenState extends State<AuthScreen>
                               prefixIcon: Icon(Icons.lock_outline),
                             ),
                           ),
-                          const Spacer(),
+                          const SizedBox(height: 32),
                           CustomButton(
                             text: 'Register',
                             isLoading: _isLoading,
