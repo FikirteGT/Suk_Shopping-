@@ -30,11 +30,11 @@ class _AIShoppingAssistantScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(Icons.auto_awesome_rounded, color: AppColors.primary),
-            SizedBox(width: 8),
-            Text('ሱቅ AI Concierge'),
+            Icon(Icons.auto_awesome_rounded, color: Theme.of(context).colorScheme.primary),
+            const SizedBox(width: 8),
+            const Text('ሱቅ AI Concierge'),
           ],
         ),
       ),

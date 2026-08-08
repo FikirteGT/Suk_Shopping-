@@ -144,10 +144,10 @@ class ProductDetailsScreen extends ConsumerWidget {
                               ),
                               Text(
                                 CurrencyFormatter.format(product.price),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.primary,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],
@@ -247,12 +247,12 @@ class ProductDetailsScreen extends ConsumerWidget {
                                             e.key.toDouble(), e.value))
                                         .toList(),
                                     isCurved: true,
-                                    color: AppColors.primary,
+                                    color: Theme.of(context).colorScheme.primary,
                                     barWidth: 3,
                                     dotData: const FlDotData(show: false),
                                     belowBarData: BarAreaData(
                                       show: true,
-                                      color: AppColors.primary
+                                      color: Theme.of(context).colorScheme.primary
                                           .withValues(alpha: 0.1),
                                     ),
                                   ),

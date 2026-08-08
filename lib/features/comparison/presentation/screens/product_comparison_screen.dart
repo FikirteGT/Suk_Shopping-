@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/widgets/smart_empty_state.dart';
 import '../providers/comparison_provider.dart';
@@ -99,9 +98,9 @@ class ProductComparisonScreen extends ConsumerWidget {
                               const SizedBox(height: 4),
                               Text(
                                 CurrencyFormatter.format(p.price),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.primary,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],

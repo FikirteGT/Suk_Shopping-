@@ -24,6 +24,17 @@ class _AuthScreenState extends State<AuthScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   void _submitAuth() async {
@@ -100,90 +111,91 @@ class _AuthScreenState extends State<AuthScreen>
                 ),
               ),
               const SizedBox(height: 24),
-              SizedBox(
-                height: 380,
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    // Login Form
-                    Form(
-                      key: _loginFormKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: _usernameController,
-                            decoration: const InputDecoration(
-                              labelText: 'Username or Email',
-                              prefixIcon: Icon(Icons.person_outline),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock_outline),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text('Forgot Password?'),
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          CustomButton(
-                            text: 'Sign In',
-                            isLoading: _isLoading,
-                            onPressed: _submitAuth,
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Register Form
-                    Form(
-                      key: _registerFormKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Full Name',
-                              prefixIcon: Icon(Icons.badge_outlined),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Email Address',
-                              prefixIcon: Icon(Icons.email_outlined),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              labelText: 'Create Password',
-                              prefixIcon: Icon(Icons.lock_outline),
-                            ),
-                          ),
-                          const SizedBox(height: 32),
-                          CustomButton(
-                            text: 'Register',
-                            isLoading: _isLoading,
-                            onPressed: _submitAuth,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _tabController.index == 0
+                  ? _buildLoginForm()
+                  : _buildRegisterForm(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildLoginForm() {
+    return Form(
+      key: _loginFormKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            controller: _usernameController,
+            decoration: const InputDecoration(
+              labelText: 'Username or Email',
+              prefixIcon: Icon(Icons.person_outline),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            controller: _passwordController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+              prefixIcon: Icon(Icons.lock_outline),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {},
+              child: const Text('Forgot Password?'),
+            ),
+          ),
+          const SizedBox(height: 24),
+          CustomButton(
+            text: 'Sign In',
+            isLoading: _isLoading,
+            onPressed: _submitAuth,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRegisterForm() {
+    return Form(
+      key: _registerFormKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Full Name',
+              prefixIcon: Icon(Icons.badge_outlined),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Email Address',
+              prefixIcon: Icon(Icons.email_outlined),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Create Password',
+              prefixIcon: Icon(Icons.lock_outline),
+            ),
+          ),
+          const SizedBox(height: 32),
+          CustomButton(
+            text: 'Register',
+            isLoading: _isLoading,
+            onPressed: _submitAuth,
+          ),
+        ],
       ),
     );
   }

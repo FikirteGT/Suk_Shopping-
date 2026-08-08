@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/smart_empty_state.dart';
@@ -86,8 +85,8 @@ class CartScreen extends ConsumerWidget {
                                   const SizedBox(height: 4),
                                   Text(
                                     CurrencyFormatter.format(item.product.price),
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
+                                    style: TextStyle(
+                                      color: Theme.of(context).colorScheme.primary,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -174,10 +173,10 @@ class CartScreen extends ConsumerWidget {
                           ),
                           Text(
                             CurrencyFormatter.format(cartNotifier.grandTotal),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         ],

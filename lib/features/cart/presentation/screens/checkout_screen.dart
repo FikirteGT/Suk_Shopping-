@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../order/presentation/providers/order_provider.dart';
@@ -157,10 +156,10 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                     const Text('Total Amount Payable'),
                     Text(
                       CurrencyFormatter.format(cartNotifier.grandTotal),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ],
